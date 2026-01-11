@@ -1,0 +1,75 @@
+""".gitignore for FastAPI project"""
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Project specific
+models/*.h5
+models/*.keras
+models/*.pb
+uploads/*
+!uploads/.gitkeep
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Temp
+*.tmp
+*.temp
+apps/api/QUICKSTART.md
+apps/api/SETUP_COMPLETE.md
+apps/api/SETUP.md
+apps/api/test_api.py
+apps/api/INTEGRATION.md

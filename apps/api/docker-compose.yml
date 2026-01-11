@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    container_name: maize-disease-api
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - ENVIRONMENT=production
+      - MODEL_PATH=/app/models/maize_disease_model.h5
+    volumes:
+      - ./models:/app/models
+      - ./uploads:/app/uploads
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s

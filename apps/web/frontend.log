@@ -1,0 +1,12 @@
+
+> dev
+> react-router dev --port 5173
+
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: http://172.20.10.2:5173/
+  ➜  press h + enter to show help
+serveStatic: root path 'build/client' is not found, are you sure it's correct?
+serveStatic: root path './public' is not found, are you sure it's correct?
+🚧 Dev server started
+09:24:24 [vite] .env changed, restarting server...
+[vite] Detected change in .env. Exiting for restart...
