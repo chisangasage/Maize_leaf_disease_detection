@@ -304,11 +304,9 @@ def assess_disease_risk(temperature, humidity, precipitation):
 - [x] Mock mode for testing
 - [x] Proper error handling and logging
 - [x] API documentation (Swagger/OpenAPI)
-
-### 🔄 In Progress
-- [ ] Model accuracy optimization
-- [ ] Historical prediction tracking
-- [ ] User authentication
+- [x] Model accuracy optimization
+- [x] Historical prediction tracking
+- [x] User authentication
 
 ### 📋 Planned
 - [ ] Mobile app (React Native)
@@ -447,13 +445,6 @@ curl -X POST -F "file=@leaf.jpg" \
 - ✅ Error messages don't leak system information
 - ⚠️ Production: Use HTTPS, implement rate limiting, add authentication
 
-## 📚 Documentation
-
-- **[PROJECT_DEFENSE_SPEECH.md](./PROJECT_DEFENSE_SPEECH.md)** - Full presentation speech for project defense
-- **[API Integration Guide](./apps/api/INTEGRATION.md)** - Detailed backend integration
-- **[Setup Instructions](./apps/api/SETUP.md)** - Step-by-step setup guide
-- **[Quick Start](./apps/api/QUICKSTART.md)** - Fast startup commands
-
 ## 🌟 Key Achievements
 
 1. **Full-Stack Integration** - Frontend and backend communicating seamlessly
@@ -475,15 +466,18 @@ This project can evolve into:
 
 ## 👨‍💻 Development Team
 
-**Project Lead:** [Your Name]  
+**Project Lead:** Chisanga Kabwe  
 **Roles:** Full-Stack Developer, AI Engineer, Project Manager
+**Developer:** Raphael Phiri
+**Roles:** Full-Stack Developer
 
 ## 📝 License
 
 This project is licensed under the MIT License. See LICENSE file for details.
 
 ## 🙋 Support & Contact
-
+Chisanga Kabwe 
+chisangasage@gmail.com
 For questions or issues:
 1. Check [Troubleshooting](#-troubleshooting) section
 2. Review API documentation at `http://localhost:8000/docs`
