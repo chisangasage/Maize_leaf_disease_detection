@@ -43,21 +43,24 @@ async def startup_event():
     logger.info("Starting FastAPI server...")
     logger.info(f"Environment: {settings.ENVIRONMENT}")
     logger.info("Loading disease detection model...")
+
+    # Allow skipping model load (useful for testing)
+    skip = os.getenv("SKIP_MODEL_LOAD", "0")  # Changed default to 0 (try to load)
+    if skip == "1":
+        logger.info("SKIP_MODEL_LOAD=1 set; skipping model load (mock mode)")
+        app.model = None
+        return
+
     try:
-        # Allow skipping model load (useful for environments where TensorFlow
-        # binary may not be compatible). Set SKIP_MODEL_LOAD=0 to attempt load.
-        skip = os.getenv("SKIP_MODEL_LOAD", "1")
-        if skip == "1":
-            logger.info("SKIP_MODEL_LOAD=1 set; skipping model load (mock mode)")
-            logger.warning("NOTE: Running in MOCK MODE. Real model predictions not available.")
-            logger.warning("To load real model, fix TensorFlow CPU compatibility issues first.")
-            app.model = None
+        # Try to load model (will prefer ONNX over TensorFlow)
+        app.model = load_model(settings.MODEL_PATH)
+        if app.model is not None:
+            logger.info("✅ Model loaded successfully!")
         else:
-            app.model = load_model(settings.MODEL_PATH)
-            logger.info("Model loaded successfully!")
+            logger.warning("⚠️ Model loading returned None, using mock predictions")
     except Exception as e:
-        logger.error(f"Failed to load model: {e}")
-        logger.warning("Falling back to mock predictions...")
+        logger.error(f"❌ Failed to load model: {e}")
+        logger.warning("⚠️ Falling back to mock predictions...")
         app.model = None
 
 @app.on_event("shutdown")

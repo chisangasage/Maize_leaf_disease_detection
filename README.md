@@ -115,6 +115,47 @@ apps/
 └── mobile/                           # React Native (Future)
 ```
 
+## 🏗️ System Architecture
+
+### Modular Design of the System Functions
+
+The system follows a modular architecture with clear separation of concerns, divided into functional layers:
+
+#### Backend Modules (FastAPI)
+- **Routers Module**: Handles API endpoints and request routing
+  - `disease.py`: Disease prediction endpoint with image processing
+  - `weather.py`: Weather data retrieval and processing
+  - `health.py`: System health monitoring and status checks
+
+- **Utils Module**: Contains business logic and helper functions
+  - `model_loader.py`: TensorFlow model loading and inference
+  - `weather_helper.py`: Open-Meteo API integration and risk assessment
+
+- **Config Module**: Centralized configuration management
+  - `config.py`: Application settings, CORS configuration, and environment variables
+
+- **Main Module**: Application entry point and startup logic
+  - `main.py`: FastAPI app initialization, middleware setup, and server configuration
+
+#### Frontend Modules (React)
+- **Components Module**: Reusable UI components
+  - `Header.jsx`: Navigation and weather widget display
+  - `ImageUpload.jsx`: File upload interface with preview
+  - `ResultCard.jsx`: Prediction results and weather data visualization
+
+- **Pages Module**: Route-based page components
+  - `page.jsx`: Home page with system overview
+  - `detect/page.jsx`: Disease detection interface
+  - `about/page.jsx`: Information and documentation
+
+- **Utils Module**: Frontend helper functions and utilities
+
+This modular design ensures:
+- **Maintainability**: Each module can be updated independently
+- **Scalability**: Easy to add new features without affecting existing code
+- **Testability**: Individual modules can be tested in isolation
+- **Reusability**: Components and utilities can be shared across the application
+
 ## 🔌 API Endpoints
 
 ### Disease Prediction

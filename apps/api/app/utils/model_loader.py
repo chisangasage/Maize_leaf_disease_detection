@@ -12,28 +12,33 @@ logger = logging.getLogger(__name__)
 
 def load_model(model_path: str):
     """
-    Load TensorFlow/Keras model
-    
+    Load TensorFlow model for disease prediction
+
     Args:
-        model_path: Path to the saved model (.h5 or .keras file)
-    
+        model_path: Path to the saved model (.h5 or directory)
+
     Returns:
-        Loaded model object
+        Loaded TensorFlow model or None for mock mode
     """
     try:
         import tensorflow as tf
-        
+
         if not os.path.exists(model_path):
             logger.warning(f"Model not found at {model_path}. Using mock model for testing.")
             return None
-        
+
         model = tf.keras.models.load_model(model_path)
-        logger.info(f"Model loaded successfully from {model_path}")
+        logger.info(f"TensorFlow model loaded successfully from {model_path}")
         return model
-    
+
+    except ImportError as e:
+        logger.warning(f"TensorFlow not available: {e}")
+        logger.warning("Falling back to mock predictions")
+        return None
     except Exception as e:
         logger.error(f"Error loading model: {e}")
-        raise
+        logger.warning("Falling back to mock predictions")
+        return None
 
 def preprocess_image(image_bytes: bytes, input_size: int = 224) -> np.ndarray:
     """
@@ -71,7 +76,7 @@ def preprocess_image(image_bytes: bytes, input_size: int = 224) -> np.ndarray:
 
 def predict_disease(model, image_bytes: bytes, class_names: list, input_size: int = 224):
     """
-    Make disease prediction on image
+    Make disease prediction on image using TensorFlow
     
     Args:
         model: Loaded TensorFlow model
@@ -98,8 +103,10 @@ def predict_disease(model, image_bytes: bytes, class_names: list, input_size: in
         # Preprocess image
         processed_image = preprocess_image(image_bytes, input_size)
         
-        # Make prediction
+        # Run TensorFlow inference
+        logger.info("Running inference with TensorFlow")
         predictions = model.predict(processed_image, verbose=0)
+        
         predicted_class_idx = np.argmax(predictions[0])
         confidence = float(predictions[0][predicted_class_idx])
         

@@ -121,7 +121,7 @@ async def get_weather_forecast(
                 params={
                     "latitude": latitude,
                     "longitude": longitude,
-                    "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum,humidity_2m_max,wind_speed_10m_max",
+                    "daily": "temperature_2m_max,temperature_2m_min,precipitation_sum,relative_humidity_2m_max,wind_speed_10m_max",
                     "forecast_days": days,
                     "timezone": "auto"
                 }
@@ -135,7 +135,7 @@ async def get_weather_forecast(
             forecast_days = []
             for i in range(len(daily.get("time", []))):
                 temp_max = daily["temperature_2m_max"][i]
-                humidity = daily["humidity_2m_max"][i]
+                humidity = daily["relative_humidity_2m_max"][i]
                 precipitation = daily["precipitation_sum"][i]
                 
                 forecast_days.append({
@@ -158,7 +158,7 @@ async def get_weather_forecast(
             }
     
     except httpx.HTTPError as e:
-        logger.error(f"Weather API error: {e}")
+        logger.error(f"Weather API error: {e}, status: {e.response.status_code if hasattr(e, 'response') else 'unknown'}, response: {e.response.text if hasattr(e, 'response') else 'no response'}")
         raise HTTPException(status_code=503, detail="Error fetching forecast data")
     
     except Exception as e:

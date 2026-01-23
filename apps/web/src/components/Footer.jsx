@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="text-center text-gray-600 text-sm">
           <p className="mb-2">
             <span className="font-semibold text-gray-900">
-              University Research Project
+              Cavendish University Zambia Research Project
             </span>
           </p>
           <p className="mb-1">Automated Maize Leaf Disease Detection System</p>

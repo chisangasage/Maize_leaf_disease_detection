@@ -455,6 +455,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta httpEquiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' https://kit.fontawesome.com https://ka-f.fontawesome.com https://ka-p.fontawesome.com https://fonts.googleapis.com https://fonts.gstatic.com blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://ka-f.fontawesome.com https://ka-p.fontawesome.com https://kit.fontawesome.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com https://ka-p.fontawesome.com data:; img-src 'self' data: https: blob:; connect-src 'self' http://localhost:8000 https://api.open-meteo.com ws://localhost:4000 wss://localhost:4000 http://localhost:5173 ws://localhost:5173 wss://localhost:5173; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self';" />
         <Meta />
         <Links />
         <script type="module" src="/src/__create/dev-error-overlay.js"></script>

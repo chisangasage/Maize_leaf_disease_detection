@@ -1,5 +1,6 @@
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import FloatingWeatherWidget from "../../components/FloatingWeatherWidget";
 import { Code, Database, Cpu, Globe, Leaf, BarChart } from "lucide-react";
 
 export default function AboutPage() {
@@ -168,6 +169,7 @@ export default function AboutPage() {
       </main>
 
       <Footer />
+      <FloatingWeatherWidget />
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import FloatingWeatherWidget from "../../components/FloatingWeatherWidget";
 import ImageUpload from "../../components/ImageUpload";
 import ResultCard from "../../components/ResultCard";
 import { Loader2, AlertCircle } from "lucide-react";
@@ -210,6 +211,7 @@ export default function DetectPage() {
       </main>
 
       <Footer />
+      <FloatingWeatherWidget />
     </div>
   );
 }
