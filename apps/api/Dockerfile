@@ -1,12 +1,17 @@
-FROM python:3.10-slim
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies
+# Install system dependencies for OpenCV and TensorFlow
 RUN apt-get update && apt-get install -y \
     libsm6 \
     libxext6 \
     libxrender-dev \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    libgomp1 \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
@@ -18,6 +23,9 @@ COPY . .
 
 # Create necessary directories
 RUN mkdir -p models uploads
+
+# Make sure the app directory is in Python path
+ENV PYTHONPATH=/app
 
 # Expose port
 EXPOSE 8000

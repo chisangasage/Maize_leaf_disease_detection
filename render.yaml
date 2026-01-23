@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: maize-disease-api
+    runtime: docker
+    dockerfilePath: ./apps/api/Dockerfile
+    buildCommand: docker build -t maize-api ./apps/api
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: false
+      - key: MODEL_PATH
+        value: ./models/maize_disease_cnn.h5
+      - key: SKIP_MODEL_LOAD
+        value: 0
+    healthCheckPath: /api/health/live
+    disk:
+      name: maize-models
+      mountPath: /app/models
+      sizeGB: 1
+    regions:
+      - singapore
