@@ -3,7 +3,6 @@ uvicorn==0.24.0
 python-multipart==0.0.6
 pillow==10.1.0
 numpy==1.26.3
-tensorflow-cpu==2.13.1
 opencv-python==4.8.1.78
 requests==2.31.0
 httpx==0.25.2
