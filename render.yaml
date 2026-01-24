@@ -3,7 +3,7 @@ services:
     name: maize-disease-api
     runtime: docker
     dockerfilePath: ./apps/api/Dockerfile
-    buildCommand: docker build -t maize-api ./apps/api
+    buildContext: .
     envVars:
       - key: ENVIRONMENT
         value: production
