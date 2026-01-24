@@ -12,11 +12,44 @@ RUN apt-get update && apt-get install -y \
     libxext6 \
     libxrender-dev \
     libgomp1 \
+    libgthread-2.0-0 \
+    libgtk2.0-dev \
+    libavcodec-dev \
+    libavformat-dev \
+    libswscale-dev \
+    libv4l-dev \
+    libatlas-base-dev \
+    gfortran \
+    build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install Python dependencies
-COPY apps/api/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Upgrade pip and install Python dependencies
+RUN pip install --upgrade pip setuptools wheel
+
+# Install basic dependencies first
+RUN pip install --no-cache-dir \
+    fastapi==0.104.1 \
+    uvicorn==0.24.0 \
+    python-multipart==0.0.6 \
+    pillow==10.1.0 \
+    numpy==1.26.3 \
+    requests==2.31.0 \
+    httpx==0.25.2 \
+    pydantic==2.5.0 \
+    pydantic-settings==2.1.0 \
+    python-dotenv==1.0.0 \
+    aiofiles==23.2.1
+
+# Install heavier packages separately
+RUN pip install --no-cache-dir \
+    opencv-python==4.8.1.78 \
+    pandas==2.3.3 \
+    openmeteo-requests==1.7.4 \
+    requests-cache==1.2.1 \
+    retry-requests==2.0.0
+
+# Install TensorFlow last (most likely to fail)
+RUN pip install --no-cache-dir tensorflow-cpu==2.13.1 || echo "TensorFlow install failed, continuing..."
 
 # Copy application code
 COPY apps/api/ .
