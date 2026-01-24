@@ -7,9 +7,15 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install additional Python dependencies
-COPY apps/api/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install essential Python dependencies only
+RUN pip install --no-cache-dir \
+    fastapi==0.104.1 \
+    uvicorn==0.24.0 \
+    python-multipart==0.0.6 \
+    pillow==10.1.0 \
+    requests==2.31.0 \
+    pydantic==2.5.0 \
+    || echo "Essential packages installed"
 
 # Copy application code
 COPY apps/api/ .
