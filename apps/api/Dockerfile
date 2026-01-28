@@ -7,6 +7,8 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     && rm -rf /var/lib/apt/lists/*
 
+    
+
 # Install essential Python dependencies only
 RUN pip install --no-cache-dir \
     fastapi==0.104.1 \
@@ -14,7 +16,7 @@ RUN pip install --no-cache-dir \
     python-multipart==0.0.6 \
     pillow==10.1.0 \
     requests==2.31.0 \
-    pydantic==2.5.0 \
+    pydantic \
     || echo "Essential packages installed"
 
 # Copy application code
