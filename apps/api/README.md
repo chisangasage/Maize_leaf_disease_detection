@@ -92,37 +92,6 @@ The API will be available at: `http://localhost:8000`
 ### 1. Using Swagger UI
 Open browser: `http://localhost:8000/docs`
 
-### 2. Using Python Requests
-
-```python
-import requests
-from pathlib import Path
-
-# Single prediction
-with open("leaf_image.jpg", "rb") as f:
-    files = {"file": f}
-    response = requests.post("http://localhost:8000/api/disease/predict", files=files)
-    print(response.json())
-
-# Get weather
-weather = requests.get(
-    "http://localhost:8000/api/weather/current",
-    params={"latitude": -1.2921, "longitude": 36.8219}  # Nairobi
-)
-print(weather.json())
-```
-
-### 3. Using cURL
-
-```bash
-# Predict disease
-curl -X POST "http://localhost:8000/api/disease/predict" \
-  -H "accept: application/json" \
-  -F "file=@leaf_image.jpg"
-
-# Get weather forecast
-curl "http://localhost:8000/api/weather/forecast?latitude=-1.2921&longitude=36.8219&days=7"
-```
 
 ## 📁 Project Structure
 
@@ -130,7 +99,7 @@ curl "http://localhost:8000/api/weather/forecast?latitude=-1.2921&longitude=36.8
 apps/api/
 ├── main.py                 # FastAPI app entry point
 ├── requirements.txt        # Python dependencies
-├── .env.example           # Environment template
+├── .env                    # Environment
 ├── README.md              # This file
 ├── models/                # Trained model files (create this)
 │   └── maize_disease_model.h5
@@ -164,33 +133,6 @@ Edit `app/config.py` to customize:
 | `MAX_FILE_SIZE` | 5MB | Max upload size |
 | `ALLOWED_EXTENSIONS` | .jpg, .jpeg, .png, .gif, .bmp | Accepted image formats |
 
-## 🌐 Frontend Integration
-
-### React/Next.js Example
-
-```javascript
-// Predict disease
-async function predictDisease(imageFile) {
-  const formData = new FormData();
-  formData.append("file", imageFile);
-  
-  const response = await fetch("http://localhost:8000/api/disease/predict", {
-    method: "POST",
-    body: formData
-  });
-  
-  return response.json();
-}
-
-// Get weather with disease risk
-async function getWeatherRisk(lat, lon) {
-  const response = await fetch(
-    `http://localhost:8000/api/weather/current?latitude=${lat}&longitude=${lon}`
-  );
-  
-  return response.json();
-}
-```
 
 ## 🚀 Deployment
 
@@ -319,10 +261,6 @@ Once running, visit:
 - Validate all input data
 - Use HTTPS in production
 
-## 📄 License
-
-This project is part of the Create Anything initiative.
-
 ## 🤝 Support
 
 For issues or questions:
@@ -330,3 +268,5 @@ For issues or questions:
 2. Review error messages in server logs
 3. Verify model and image formats
 4. Check frontend CORS configuration
+5. or contact developer @ chisangasagee@gmail.com
+
