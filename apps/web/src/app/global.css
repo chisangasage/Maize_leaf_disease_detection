@@ -1,9 +1,16 @@
+@import 'leaflet/dist/leaflet.css';
+@import 'leaflet-draw/dist/leaflet.draw.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  input, textarea, select, button {
+
+  input,
+  textarea,
+  select,
+  button {
     @apply outline-none focus:outline-none;
   }
 }

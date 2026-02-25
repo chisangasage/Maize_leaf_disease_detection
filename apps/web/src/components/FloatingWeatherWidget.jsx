@@ -178,7 +178,7 @@ export default function FloatingWeatherWidget() {
                 <div className="flex items-center gap-2 text-sm">
                   <Wind className="text-gray-500" size={16} />
                   <span className="text-gray-600">Wind:</span>
-                  <span className="font-medium">{weather.wind_speed} km/h</span>
+                  <span className="font-medium">{Number(weather.wind_speed).toFixed(2)} km/h</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <CloudRain className="text-blue-400" size={16} />

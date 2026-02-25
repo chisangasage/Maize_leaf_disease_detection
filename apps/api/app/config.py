@@ -34,15 +34,34 @@ class Settings(BaseSettings):
         "http://127.0.0.1:5174",
     ]
     
-    # Model settings
-    MODEL_PATH: str = os.getenv("MODEL_PATH", "./Maize_Disease_Model-20260107T060943Z-1-001/Maize_Disease_Model/maize_disease_cnn.h5")
-    MODEL_NAME: str = "maize_disease_cnn"
-    INPUT_SIZE: int = 224
-    NUM_CLASSES: int = 3  # Adjust based on your model
+    # Azure Custom Vision Prediction API settings
+    AZURE_PREDICTION_KEY: str = os.getenv(
+        "AZURE_PREDICTION_KEY",
+        "2ZMZ5aM0jLhCqXwCROYFqEwhJub4rUvtsiuVNtuJVyOkypTGGUw8JQQJ99CBACYeBjFXJ3w3AAAIACOGj7D5"
+    )
+    AZURE_PREDICTION_ENDPOINT: str = os.getenv(
+        "AZURE_PREDICTION_ENDPOINT",
+        "https://maizediseases-prediction.cognitiveservices.azure.com/"
+    )
+    AZURE_PROJECT_ID: str = os.getenv(
+        "AZURE_PROJECT_ID",
+        "1fd7bed8-bf75-4d56-bfcf-af56222748f8"
+    )
+    AZURE_ITERATION_NAME: str = os.getenv("AZURE_ITERATION_NAME", "Iteration2")
+    
+    # NASA Satellite API settings
+    NASA_API_KEY: str = os.getenv("NASA_API_KEY", "")
+
+    # Known class names (for reference / fallback display)
     CLASS_NAMES: List[str] = [
         "Healthy",
         "Gray Leaf Spot",
-        "Northern Corn Leaf Blight"
+        "Common Rust",
+        "Northern Corn Leaf Blight",
+        "Southern Rust",
+        "Leaf Spot",
+        "Streak Virus",
+        "Blight"
     ]
     
     # File upload settings

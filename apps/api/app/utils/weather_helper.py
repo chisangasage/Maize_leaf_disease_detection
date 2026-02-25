@@ -16,10 +16,26 @@ _retry_session = retry(_cache_session, retries=5, backoff_factor=0.2)
 _openmeteo = openmeteo_requests.Client(session=_retry_session)
 
 
+def get_location_name(latitude: float, longitude: float) -> Optional[str]:
+    """Get location name from coordinates using Nominatim reverse geocoding"""
+    try:
+        url = f"https://nominatim.openstreetmap.org/reverse?format=json&lat={latitude}&lon={longitude}&zoom=10"
+        headers = {"User-Agent": "MaizeDiseaseApp/1.0"}
+        response = _retry_session.get(url, headers=headers, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            address = data.get("address", {})
+            return address.get("city") or address.get("town") or address.get("village") or address.get("county") or address.get("state")
+        return None
+    except Exception as e:
+        logger.error(f"Reverse geocoding error: {e}")
+        return None
+
+
 def fetch_current_weather(latitude: float, longitude: float) -> Optional[Dict]:
     """Fetch current weather from Open-Meteo and return simplified dict
 
-    Returns keys: temperature, humidity, precipitation, wind_speed, disease_risk
+    Returns keys: temperature, humidity, precipitation, wind_speed, disease_risk, location_name
     """
     try:
         url = "https://api.open-meteo.com/v1/forecast"
@@ -40,8 +56,9 @@ def fetch_current_weather(latitude: float, longitude: float) -> Optional[Dict]:
         wind_speed = current.Variables(4).Value()  # wind_speed_10m
 
         disease_risk = assess_disease_risk(temp, humidity, precipitation)
+        location_name = get_location_name(latitude, longitude)
 
-        logger.info(f"Fetched weather for lat={latitude}, lon={longitude}: temp={temp}°C, humidity={humidity}%, risk={disease_risk}")
+        logger.info(f"Fetched weather for {location_name} (lat={latitude}, lon={longitude}): temp={temp}°C, humidity={humidity}%, risk={disease_risk}")
 
         return {
             "temperature": temp,
@@ -49,6 +66,9 @@ def fetch_current_weather(latitude: float, longitude: float) -> Optional[Dict]:
             "precipitation": precipitation,
             "wind_speed": wind_speed,
             "disease_risk": disease_risk,
+            "location_name": location_name,
+            "latitude": latitude,
+            "longitude": longitude
         }
 
     except Exception as e:

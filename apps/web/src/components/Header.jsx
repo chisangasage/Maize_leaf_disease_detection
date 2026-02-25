@@ -37,6 +37,18 @@ export default function Header() {
                 Detect Disease
               </a>
               <a
+                href="/map"
+                className="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-green-600 transition-colors font-medium text-sm sm:text-base"
+              >
+                Farm Map
+              </a>
+              <a
+                href="/history"
+                className="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-green-600 transition-colors font-medium text-sm sm:text-base"
+              >
+                Scan History
+              </a>
+              <a
                 href="/about"
                 className="px-3 py-2 rounded-lg text-gray-700 hover:bg-gray-100 hover:text-green-600 transition-colors font-medium text-sm sm:text-base"
               >

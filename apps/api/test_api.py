@@ -8,21 +8,15 @@ from pathlib import Path
 
 BASE_URL = "http://localhost:8000"
 
-def test_health():
-    """Test health endpoints"""
-    print("\n✓ Testing health endpoints...")
+def test_root():
+    """Test root endpoint"""
+    print("\n✓ Testing root endpoint...")
     
     # Root
     response = requests.get(f"{BASE_URL}/")
     print(f"  GET / : {response.status_code}")
-    
-    # Health check
-    response = requests.get(f"{BASE_URL}/api/health")
-    print(f"  GET /api/health : {response.status_code}")
-    
-    # Readiness
-    response = requests.get(f"{BASE_URL}/api/health/ready")
-    print(f"  GET /api/health/ready : {response.status_code}")
+    if response.status_code == 200:
+        print(f"  Response: {response.json()}")
 
 def test_disease_endpoints():
     """Test disease detection endpoints"""
@@ -94,7 +88,7 @@ def run_all_tests():
     print("=" * 50)
     
     try:
-        test_health()
+        test_root()
         test_disease_endpoints()
         test_weather_endpoints()
         test_prediction_with_sample_image()

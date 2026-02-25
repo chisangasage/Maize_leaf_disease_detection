@@ -16,7 +16,7 @@ _.log
 report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # dotenv environment variable files
-.env
+
 .env.development.local
 .env.test.local
 .env.production.local
@@ -38,6 +38,7 @@ e2b.*.local.toml
 
 **/.react-router
 apps/mobile/caches/*
+apps/api/myenv/*
 PROJECT_COMPLETION_SUMMARY.md
 PROJECT_DEFENSE_SPEECH.md
 QUICK_REFERENCE.md
